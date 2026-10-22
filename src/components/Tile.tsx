@@ -25,12 +25,13 @@ interface Props {
 	dimmed?: boolean;
 	onHover?: () => void;
 	onActivate?: () => void;
+	hideName?: boolean;
 }
 
-export function Tile ({model, focused, lifted, checked, dimmed, onHover, onActivate}: Props) {
+export function Tile ({model, focused, lifted, checked, dimmed, onHover, onActivate, hideName = false}: Props) {
 	const classes = ['tile', focused && 'tile--focused', lifted && 'tile--lifted', dimmed && 'tile--dimmed'].filter(Boolean).join(' ');
 	return (
-		<div class={classes} onMouseEnter={onHover} onClick={onActivate}>
+		<div class={classes} aria-label={hideName ? model.label : undefined} onMouseEnter={onHover} onClick={onActivate}>
 			<div class="tile__box" style={model.color && !model.imageUrl ? {background: model.color} : undefined}>
 				{model.imageUrl
 					? <img class="tile__image" src={model.imageUrl} alt="" />
@@ -41,7 +42,7 @@ export function Tile ({model, focused, lifted, checked, dimmed, onHover, onActiv
 							: <div class="tile__monogram">{model.label.charAt(0).toUpperCase()}</div>}
 				{checked && <div class="tile__badge"><CheckMark /></div>}
 			</div>
-			<div class="tile__label">{model.label}</div>
+			{!hideName && <div class="tile__label">{model.label}</div>}
 		</div>
 	);
 }

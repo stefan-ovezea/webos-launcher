@@ -43,7 +43,7 @@ const HINT = {
 	select: 'OK adds or removes an item · Hold OK to re-order · Back returns home',
 	reorder: 'OK picks up an item · Hold OK or choose Done to finish',
 	holding: 'Arrows move it · OK puts it down · Back cancels',
-	options: 'OK turns an option on or off · Back returns home'
+	options: 'OK changes an option or opens configuration · Back returns home'
 } as const;
 
 /** Settings: pick which apps and sources appear on the home rows and their order, plus options.

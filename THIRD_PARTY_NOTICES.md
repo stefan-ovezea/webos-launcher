@@ -9,9 +9,11 @@ is **not** covered by that licence.
 | Component | Licence | Where |
 |---|---|---|
 | [Preact](https://preactjs.com) | MIT, © Jason Miller | compiled into `assets/app.js`; licence text in [public/licenses/preact-MIT.txt](public/licenses/preact-MIT.txt) |
+| [MQTT.js](https://github.com/mqttjs/MQTT.js) | MIT, © MQTT.js contributors | compiled into `assets/app.js`; [licence](public/licenses/mqtt-MIT.txt) and [bundled dependency notices](public/licenses/mqtt-bundled-notices.txt) |
+| [ws](https://github.com/websockets/ws) | MIT, © Einar Otto Stangvik and contributors | bundled into `bridge/mqtt-bridge.cjs`; [licence](public/licenses/ws-MIT.txt) |
 | [Inter](https://rsms.me/inter/) typeface | SIL Open Font License 1.1, © The Inter Project Authors | `src/assets/inter-latin-wght.woff2`; licence text in [public/licenses/Inter-OFL.txt](public/licenses/Inter-OFL.txt) |
 
-Both licence texts are included in the installed app under `licenses/`.
+These licence texts are included in the installed app under `licenses/`.
 
 ## App and input icons
 

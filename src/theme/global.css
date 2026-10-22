@@ -356,3 +356,160 @@ html, body {
 	pointer-events: none;
 }
 .toast--error { color: var(--color-danger); }
+
+/* ---------- optional wallpaper ---------- */
+.wallpaper, .wallpaper img, .wallpaper__shade {
+	position: absolute;
+	left: 0; top: 0;
+	width: 100%; height: 100%;
+	pointer-events: none;
+}
+.wallpaper img { object-fit: cover; }
+.wallpaper__shade { background: linear-gradient(180deg, rgba(0,0,0,.40), rgba(0,0,0,.65)); }
+
+/* Four quiet, evenly spaced sections when Home Assistant is enabled. */
+.home--with-ha { --layout-tile-size: 112px; --font-tile-label: 18px; }
+.home--with-ha .header__greeting { font-size: 58px; }
+.home--with-ha .rows { top: 208px; }
+.home--with-ha .row { margin-bottom: 18px; }
+.home--with-ha .row__label { font-size: 18px; margin-bottom: 12px; }
+.home--with-ha .tile__box { border-radius: 20px; }
+.home--with-ha .tile__label { margin-top: 10px; height: 44px; }
+.home--with-ha .tile__monogram { font-size: 46px; }
+
+/* ---------- Home Assistant cards ---------- */
+.ha-row__heading { display: flex; align-items: baseline; justify-content: space-between; }
+.ha-row__status { font-size: 16px; color: var(--color-text-secondary); }
+.ha-row__status--online { color: #a4cbb5; }
+.ha-row__track { display: flex; transition: transform var(--motion-scroll-ms) ease-out; }
+.ha-row__track--centered { justify-content: center; }
+.ha-card {
+	position: relative;
+	flex: 0 0 auto;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	width: 276px; height: 126px;
+	padding: 18px 22px;
+	margin-right: 24px;
+	border: 0; border-radius: 20px;
+	background: rgba(22,22,22,.92);
+	color: var(--color-text-primary);
+	box-shadow: 0 0 0 2px var(--color-tile-border);
+	font-family: inherit; text-align: left;
+	outline: none;
+	transition: box-shadow var(--motion-focus-ms), background var(--motion-focus-ms);
+}
+.ha-card:last-child { margin-right: 0; }
+.ha-card--focused { box-shadow: 0 0 0 4px var(--color-tile-border-focus); background: var(--color-tile-bg-focus); }
+.ha-card__label { display: block; max-width: 100%; font-size: 18px; line-height: 1.25; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.ha-card__value { display: block; font-size: 32px; line-height: 1.4; font-weight: 300; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.ha-card__value small { font-size: 20px; color: var(--color-text-secondary); }
+.ha-card__hint { display: block; font-size: 14px; line-height: 1.4; color: var(--color-text-secondary); }
+.ha-card__button-icon { position: absolute; top: 18px; right: 20px; font-size: 30px; font-weight: 300; color: #a4cbb5; }
+button.ha-card .ha-card__label { padding-right: 28px; }
+button.ha-card .ha-card__hint { margin-top: 24px; }
+.ha-card--stale .ha-card__value { color: var(--color-text-secondary); }
+.ha-card--setup { width: 100%; height: 126px; align-items: center; }
+button.ha-card--setup .ha-card__label { padding-right: 0; }
+button.ha-card--setup .ha-card__hint { margin-top: 10px; }
+.option__action { flex: 0 0 auto; color: var(--color-text-secondary); font-size: 20px; }
+
+/* ---------- remote-friendly MQTT configuration ---------- */
+.mqtt-settings { display: flex; flex-direction: column; }
+.mqtt-settings__intro, .mqtt-settings__footnote { font-size: 20px; line-height: 1.45; color: var(--color-text-secondary); margin: 20px 0; }
+.mqtt-settings__footnote { font-size: 17px; margin: 20px 0 0; }
+.mqtt-settings__error { font-size: 21px; color: var(--color-danger); margin: 0 0 16px; }
+.remote-form { flex: 1 1 auto; min-height: 0; overflow-y: auto; padding: 8px; margin: 0 -8px; }
+.mqtt-field {
+	display: flex; flex: 0 0 auto;
+	align-items: center; justify-content: space-between;
+	width: 100%; min-height: 86px; padding: 18px 24px; margin: 0 0 16px;
+	border: 0; border-radius: 14px; background: var(--color-tile-bg);
+	box-shadow: 0 0 0 2px var(--color-tile-border);
+	color: var(--color-text-primary); font: inherit; font-size: 23px;
+	text-align: left; outline: none;
+}
+.mqtt-field--focused { box-shadow: 0 0 0 4px var(--color-tile-border-focus); background: var(--color-tile-bg-focus); }
+.mqtt-field--editing { box-shadow: 0 0 0 4px #a4cbb5; }
+.mqtt-field > span:first-child { flex: 1 1 42%; margin-right: 24px; overflow: hidden; }
+.mqtt-field small { display: block; margin-top: 7px; font-size: 17px; color: var(--color-text-secondary); overflow-wrap: break-word; }
+.mqtt-field input, .mqtt-field textarea {
+	flex: 1 1 58%; min-width: 0; width: 58%; padding: 12px 14px;
+	border: 1px solid var(--color-tile-border); border-radius: 8px;
+	background: #0a0a0a; color: var(--color-text-primary); font: inherit; font-size: 22px;
+	outline: none; user-select: text;
+}
+.mqtt-field textarea { resize: none; }
+.mqtt-field input::placeholder, .mqtt-field textarea::placeholder { color: #777; }
+.toast { max-width: 1640px; white-space: normal; text-align: center; line-height: 1.4; z-index: 10; }
+
+/* ---------- wallpaper home: a quiet top bar, sensors, and bottom dock ---------- */
+.home--wallpaper { --layout-tile-size: 128px; }
+.wallpaper-topbar {
+	position: absolute;
+	top: 48px; left: var(--layout-edge-padding); right: var(--layout-edge-padding);
+	display: flex; align-items: center; justify-content: space-between;
+	height: 56px;
+}
+.wallpaper-utilities { display: flex; align-items: center; }
+.wallpaper-utility {
+	position: relative;
+	width: 56px; height: 56px; margin: 0 16px 0 0; padding: 0;
+	border: 0; border-radius: 50%; outline: none;
+	background: rgba(16,18,21,.64); color: var(--color-text-primary);
+	box-shadow: 0 0 0 1px rgba(255,255,255,.18);
+	transition: box-shadow var(--motion-focus-ms), background var(--motion-focus-ms);
+}
+.wallpaper-utility .tile__glyph { left: 26%; top: 26%; width: 48%; height: 48%; }
+.wallpaper-utility--focused { background: rgba(35,38,42,.92); box-shadow: 0 0 0 3px var(--color-tile-border-focus); }
+.clock--compact {
+	position: static; display: flex; align-items: center;
+	font-size: 22px; font-weight: 400; line-height: 1;
+	white-space: nowrap; color: var(--color-text-primary);
+	text-shadow: 0 2px 12px rgba(0,0,0,.5);
+}
+.clock__separator { margin: 0 18px; opacity: .55; }
+.clock__compact-period { font-size: 18px; }
+.wallpaper-assistant {
+	position: absolute;
+	top: 152px; left: var(--layout-edge-padding); right: var(--layout-edge-padding);
+}
+.home--wallpaper .row { margin-bottom: 0; }
+.home--wallpaper .row__viewport { opacity: 1; }
+.home--wallpaper .ha-card {
+	height: 108px; padding: 18px 24px;
+	background: rgba(16,18,21,.64);
+	box-shadow: 0 0 0 1px rgba(255,255,255,.18);
+}
+.home--wallpaper .ha-card--focused { background: rgba(35,38,42,.9); box-shadow: 0 0 0 3px var(--color-tile-border-focus); }
+.home--wallpaper .ha-card__label { font-size: 18px; color: #ddd; }
+.home--wallpaper .ha-card__value { font-size: 34px; line-height: 1.35; }
+.home--wallpaper .ha-card__button-icon { top: 34px; }
+.home--wallpaper .ha-card--setup { height: 108px; }
+.wallpaper-dock {
+	position: absolute;
+	bottom: 64px; left: var(--layout-edge-padding); right: var(--layout-edge-padding);
+}
+.wallpaper-sources { margin-bottom: 40px; }
+.source-badges__viewport { overflow: hidden; padding: 12px 0; margin: -12px 0; }
+.source-badges__track { display: flex; transition: transform var(--motion-scroll-ms) ease-out; }
+.source-badges__track--centered { justify-content: center; }
+.source-badge {
+	flex: 0 0 auto; display: flex; align-items: center;
+	width: 236px; height: 64px; padding: 0 22px; margin: 0 20px 0 0;
+	border: 0; border-radius: 32px; outline: none;
+	font-family: inherit; font-size: 20px; color: var(--color-text-primary);
+	background: rgba(16,18,21,.72); box-shadow: 0 0 0 1px rgba(255,255,255,.18);
+	text-align: left;
+	transition: box-shadow var(--motion-focus-ms), background var(--motion-focus-ms);
+}
+.source-badge:last-child { margin-right: 0; }
+.source-badge--focused { background: rgba(35,38,42,.94); box-shadow: 0 0 0 3px var(--color-tile-border-focus); }
+.source-badge__icon { position: relative; flex: 0 0 32px; width: 32px; height: 32px; margin-right: 14px; }
+.source-badge__icon img { display: block; width: 100%; height: 100%; object-fit: contain; }
+.source-badge__glyph-image { filter: brightness(2.4); }
+.source-badge__icon .tile__glyph { left: 0; top: 0; width: 100%; height: 100%; }
+.source-badge__name { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.wallpaper-apps .row__empty, .wallpaper-sources .row__empty { text-align: center; }
+.home--wallpaper .tile__box { border-radius: 22px; }

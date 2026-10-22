@@ -1,24 +1,31 @@
 {
   "name": "webos-launcher",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "private": true,
   "description": "Minimalist home-screen launcher for LG webOS TVs (webOS 6 / Chrome 79 compatible)",
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc --noEmit && vite build",
+    "build": "tsc --noEmit && vite build && npm run build:bridge",
     "package": "sh scripts/package.sh",
     "install:tv": "sh scripts/install.sh",
     "deploy": "npm run build && npm run package && npm run install:tv",
-    "manifest": "node scripts/gen-manifest.mjs"
+    "manifest": "node scripts/gen-manifest.mjs",
+    "test": "vitest run",
+    "build:bridge": "esbuild bridge/mqtt-bridge.cjs --bundle --platform=node --target=node8 --external:bufferutil --external:utf-8-validate --legal-comments=eof --outfile=dist/bridge/mqtt-bridge.cjs"
   },
   "devDependencies": {
     "@preact/preset-vite": "^2.10.6",
     "@webos-tools/cli": "^3.2.6",
+    "esbuild": "^0.25.12",
+    "jsdom": "^25.0.1",
     "typescript": "^7.0.2",
-    "vite": "^5.4.21"
+    "vite": "^5.4.21",
+    "vitest": "^3.2.7",
+    "ws": "^7.5.13"
   },
   "dependencies": {
+    "mqtt": "^5.16.1",
     "preact": "^10.29.8"
   },
   "license": "MIT"

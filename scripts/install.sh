@@ -21,7 +21,8 @@ IPK="$(ls build/*.ipk 2>/dev/null | head -1)"
 
 REMOTE_IPK="/tmp/$(basename "$IPK")"
 echo "Copying $(basename "$IPK") to $TV_HOST..."
-scp -q "$IPK" "$TV_HOST:$REMOTE_IPK"
+# Rooted TVs commonly use Dropbear without an SFTP subsystem.
+scp -O -q "$IPK" "$TV_HOST:$REMOTE_IPK"
 
 echo "Installing $APP_ID..."
 # luna-send needs a tty (-tt) to print anything; the subscription ends when the install does.

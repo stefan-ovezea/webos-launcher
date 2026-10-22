@@ -7,3 +7,6 @@ build/
 # local, per-person settings
 tv.env
 src/config/catalog.local.ts
+
+# TV backups may include local preferences
+.tv-backups/

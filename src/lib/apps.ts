@@ -8,9 +8,10 @@
 //     service isn't there, we fall back to the catalogue.
 
 import {APP_CATALOG, type CatalogApp} from '../config/catalog';
-import {APP_ID, LUNA} from '../config/constants';
-import {isWebOS, lunaCall, type LunaResponse} from './luna';
+import {APP_ID} from '../config/constants';
+import {isWebOS} from './luna';
 import {appExists} from './launch';
+import {homebrewExec} from './homebrew';
 
 export interface AppEntry {
 	id: string;
@@ -57,7 +58,6 @@ function listViaCatalog (): Promise<AppEntry[]> {
 
 // ---------- provider 2: Homebrew Channel (opt-in) ----------
 
-interface ExecResponse extends LunaResponse { stdoutString?: string; }
 interface LaunchPoint { id: string; title: string; largeIcon?: string; icon?: string; }
 
 /** Apps LG lists but that make no sense on a launcher (ourselves, promos). */
@@ -75,7 +75,7 @@ export function shellQuote (value: string): string {
 }
 
 function exec (command: string, timeoutMs = 8000): Promise<string> {
-	return lunaCall<ExecResponse>(LUNA.homebrewExec, {command}, timeoutMs).then((r) => r.stdoutString || '');
+	return homebrewExec(command, timeoutMs);
 }
 
 function listViaHomebrew (): Promise<AppEntry[]> {

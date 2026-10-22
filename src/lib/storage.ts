@@ -3,6 +3,7 @@
 
 import {STORAGE_KEY} from '../config/constants';
 import {DEFAULT_APP_IDS} from '../config/catalog';
+import {defaultMqttConfig, normalizeMqttConfig, type MqttConfig} from './mqttConfig';
 
 export interface UserConfig {
 	/** ordered app IDs for the Apps row */
@@ -11,26 +12,32 @@ export interface UserConfig {
 	sourceIds: string[] | null;
 	/** read the live app list through the Homebrew Channel (root). Off by default. */
 	useHomebrew: boolean;
+	wallpaper: boolean;
+	mqtt: MqttConfig;
 }
 
 export const DEFAULT_CONFIG: UserConfig = {
 	appIds: DEFAULT_APP_IDS.slice(),
 	sourceIds: null,
-	useHomebrew: false
+	useHomebrew: false,
+	wallpaper: false,
+	mqtt: defaultMqttConfig()
 };
 
 export function loadConfig (): UserConfig {
 	try {
 		const raw = localStorage.getItem(STORAGE_KEY);
-		if (!raw) return {...DEFAULT_CONFIG};
+		if (!raw) return {...DEFAULT_CONFIG, mqtt: defaultMqttConfig()};
 		const parsed = JSON.parse(raw) as Partial<UserConfig>;
 		return {
 			appIds: Array.isArray(parsed.appIds) ? parsed.appIds : DEFAULT_CONFIG.appIds,
 			sourceIds: Array.isArray(parsed.sourceIds) ? parsed.sourceIds : null,
-			useHomebrew: parsed.useHomebrew === true
+			useHomebrew: parsed.useHomebrew === true,
+			wallpaper: parsed.wallpaper === true,
+			mqtt: normalizeMqttConfig(parsed.mqtt)
 		};
 	} catch {
-		return {...DEFAULT_CONFIG};
+		return {...DEFAULT_CONFIG, mqtt: defaultMqttConfig()};
 	}
 }
 

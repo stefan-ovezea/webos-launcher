@@ -2,7 +2,8 @@ export interface OptionItem {
 	id: string;
 	label: string;
 	description: string;
-	value: boolean;
+	value?: boolean;
+	actionLabel?: string;
 }
 
 interface Props {
@@ -28,9 +29,9 @@ export function OptionList ({options, focused, selected, onSelect, onActivate}: 
 						<div class="option__label">{o.label}</div>
 						<div class="option__description">{o.description}</div>
 					</div>
-					<div class={`switch${o.value ? ' switch--on' : ''}`} role="switch" aria-checked={o.value}>
+					{o.actionLabel ? <div class="option__action">{o.actionLabel} →</div> : <div class={`switch${o.value ? ' switch--on' : ''}`} role="switch" aria-checked={o.value}>
 						<div class="switch__knob" />
-					</div>
+					</div>}
 				</div>
 			))}
 		</div>
